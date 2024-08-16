@@ -1,0 +1,11 @@
+@media (max-width: 900px) {
+    .page-head-minu {
+      display: none;
+    }
+    .minu-icon {
+      display: block;
+    }
+  }
+
+
+  
