@@ -14,10 +14,16 @@ function Home() {
 
     function addTodo() {
         if (inputRef.current) {
+            if (!inputRef.current?.value.trim()) return;
             const text: string = inputRef.current.value;
             const newItem = { completed: false, text };
             setTodos([...todos, newItem]);
             inputRef.current.value = "";
+        }
+    }
+    function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === "Enter") {
+            addTodo();
         }
     }
 
@@ -41,9 +47,9 @@ function Home() {
                     <input
                         className="flex-1 outline-none border-none bg-red-800 rounded-lg p-2 text-white"
                         placeholder='Add todo... '
-                        
                         ref={inputRef}
                         type="text"
+                        onKeyDown={handleKeyDown}
                     />
                     <button
                         className="bg-red-800 rounded-lg outline-none px-3 py-2 hover:bg-red-700 hover:shadow-lg hover:shadow-red-900 transition-all duration-300"
@@ -57,7 +63,7 @@ function Home() {
                         {todos.map(({ text, completed }, index) => (
                             <div className="flex justify-between items-center" key={index}>
                                 <li
-                                 className={`flex text-1xl px-4 mt-1 break-words truncate max-w-full cursor-pointer border-collapse hover:px-3 transition-all duration-150 ${completed ? "line-through" : ""}`}
+                                 className={`flex text-1xl px-4 mt-1 break-words truncate w-5/6 min-h-6 max-h-12 cursor-pointer hover:px-3 transition-all duration-150 ${completed ? "line-through" : ""}`}
                                  onClick={() => handleItemDon(index)}
                                 >
                                     {text}
